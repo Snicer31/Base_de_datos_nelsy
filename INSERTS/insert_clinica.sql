@@ -113,3 +113,38 @@ VALUES ('2026-06-26', 'Control de presión arterial', 7, 2);
 
 INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
 VALUES ('2026-06-28', 'Control de presión arterial', 7, 2);
+
+-- PACIENTES CON EXACTAMENTE CON DOS VISITAS AL MEDICO
+
+INSERT INTO "PACIENTE" ("nombre", "telefono") 
+VALUES ('Andrés Medina', 4141112233);
+
+INSERT INTO "PACIENTE" ("nombre", "telefono") 
+VALUES ('Valentina Rojas', 4122223344);
+
+INSERT INTO "PACIENTE" ("nombre", "telefono") 
+VALUES ('Javier Blanco', 4163334455);
+
+--  Visitas para Andrés Medina (ID 9) - Va con Cardiología (Médico 1)
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-01-15', 'Palpitaciones', 9, 1);
+
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-02-15', 'Chequeo de resultados (Holter)', 9, 1);
+
+
+--  Visitas para Valentina Rojas (ID 10) - Va con Pediatría (Médico 2)
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-03-10', 'Vacunación de rutina', 10, 2);
+
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-04-10', 'Revisión de peso y talla', 10, 2);
+
+
+--  Visitas para Javier Blanco (ID 11) - Va con Medicina General (Médico 3)
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-05-20', 'Chequeo general anual', 11, 3);
+
+INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
+VALUES ('2026-06-25', 'Lectura de exámenes de laboratorio', 11, 3);
+
