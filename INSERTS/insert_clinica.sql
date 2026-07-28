@@ -1,150 +1,75 @@
--- Insertar datos sobre pacientes
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Juan Pérez', 04129491953);
+-- 1. Insertar Médicos Adicionales
+INSERT INTO MEDICO (nombre, especialidad) VALUES
+('Dr. Mendez', 'Medicina Interna'),  -- Tendrá exactamente 2 consultas
+('Dra. Castillo', 'Dermatología'),   -- Tendrá exactamente 2 consultas
+('Dr. Rojas', 'Neurología'),         -- Tendrá exactamente 2 consultas
+('Dra. Leon', 'Medicina General');   -- Atenderá el resto de las consultas (más de 2)
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('María García', 04149867643);
+-- 2. Insertar 15 Pacientes
+INSERT INTO PACIENTE (nombre, telefono) VALUES
+('Andres Bello', 4141112233),
+('Sofia Blanco', 4242223344),
+('Luis Herrera', 4123334455),
+('Camila Suarez', 4164445566),
+('Diego Torres', 4265556677),
+('Valeria Pinto', 4146667788),
+('Mateo Silva', 4247778899),
+('Isabella Castro', 4128889900),
+('Santiago Vega', 4169990011),
+('Lucia Mendoza', 4261011122),
+('Gabriel Ortiz', 4142122233),
+('Daniela Rios', 4243233344),
+('Fernando Mora', 4124344455),
+('Amanda Gil', 4165455566),
+('Alejandro Cruz', 4266566677);
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Carlos López', 04125558899);
+-- 3. Insertar Visitas Médicas (Año 2026)
+INSERT INTO VISITA_MEDICA (fecha, motivo, id_paciente, id_medico) VALUES
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Ana Rodríguez', 04161162233);
+-- GRUPO A: 2 Visitas, Mismo Motivo (Aparecen en Consulta 1, Consulta 3 y Vista 2)
+('2026-02-01', 'Migraña', 1, 1),
+('2026-02-15', 'Migraña', 1, 4),
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Luis Martínez', 04265778899);
+('2026-03-05', 'Hipertensión', 2, 2),
+('2026-03-20', 'Hipertensión', 2, 4),
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Jessica Benavides', 04265778199);
+('2026-04-10', 'Asma', 3, 3),
+('2026-04-25', 'Asma', 3, 4),
 
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Milangela Larez', 04265778439);
+('2026-05-02', 'Control de rutina', 4, 4),
+('2026-05-30', 'Control de rutina', 4, 4),
 
+('2026-06-12', 'Dolor lumbar', 5, 4),
+('2026-06-26', 'Dolor lumbar', 5, 4),
 
+-- GRUPO B: 2 Visitas, Distinto Motivo (Aparecen en Consulta 1 y Vista 2, pero NO en Consulta 3)
+('2026-07-01', 'Gripe', 6, 1),
+('2026-07-10', 'Fiebre', 6, 4),
 
+('2026-07-15', 'Alergia', 7, 2),
+('2026-08-01', 'Revisión general', 7, 4),
 
---Insertar datos sobre medicos
+('2026-08-05', 'Infección', 8, 3),
+('2026-08-15', 'Mareos', 8, 4),
 
-INSERT INTO "MEDICO" ("nombre", "especialidad") 
-VALUES ('Dr. José Silva', 'Cardiología');
+('2026-09-02', 'Gastroenteritis', 9, 4),
+('2026-09-10', 'Fatiga crónica', 9, 4),
 
-INSERT INTO "MEDICO" ("nombre", "especialidad") 
-VALUES ('Dra. Carmen Suárez', 'Pediatría');
+('2026-09-20', 'Insomnio', 10, 4),
+('2026-10-05', 'Ansiedad', 10, 4),
 
-INSERT INTO "MEDICO" ("nombre", "especialidad") 
-VALUES ('Dr. Pedro Gómez', 'Medicina General');
+-- GRUPO C: 1 o 3 Visitas (Solo aparecen en el Historial general o en Consulta 3 si repiten motivo)
+-- Pacientes con 1 visita (Excluidos de Consulta 1, Vista 2 y Consulta 3)
+('2026-10-10', 'Cefalea', 11, 4),
+('2026-10-15', 'Traumatismo', 12, 4),
+('2026-12-05', 'Nutrición', 15, 4),
 
-INSERT INTO "MEDICO" ("nombre", "especialidad") 
-VALUES ('Dra. Elena Ruiz', 'Dermatología');
+-- Paciente con 3 visitas, mismo motivo (Aparece SOLO en Consulta 3 por el >= 2)
+('2026-11-01', 'Terapia física', 13, 4),
+('2026-11-10', 'Terapia física', 13, 4),
+('2026-11-20', 'Terapia física', 13, 4),
 
-INSERT INTO "MEDICO" ("nombre", "especialidad") 
-VALUES ('Dr. Roberto Fernández', 'Neurología');
-
---Insertar datos sobre las consultas/visitas medicas
-
--- 1. Neurología (Dr. Roberto Fernández, ID: 5) para dolor de cabeza crónico
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-01', 'Dolor de cabeza crónico', 1, 5);
-
--- 2. Medicina General (Dr. Pedro Gómez, ID: 3) para dolor de estómago
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-26', 'Dolor de estomago', 1, 3);
-
--- 3. Pediatría (Dra. Carmen Suárez, ID: 2) para control de niño sano
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-05', 'Control de niño sano', 2, 2);
-
--- 4. Medicina General (Dr. Pedro Gómez, ID: 3) para fiebre y malestar
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-05', 'Fiebre y malestar general', 3, 3);
-
--- 5. Dermatología (Dra. Elena Ruiz, ID: 4) para erupción cutánea
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-12', 'Erupción cutánea', 4, 4);
-
--- 6. Cardiología (Dr. José Silva, ID: 1) para control de presión arterial
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-15', 'Control de presión arterial', 5, 1);
-
--- 7. Cardiología (Dr. José Silva, ID: 1) para control de presión arterial
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-11-15', 'Control de presión arterial', 5, 1);
-
--- Visitas de seguimiento con Neurología (ID: 5) y Medicina General (ID: 3)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-02-10', 'Dolor de cabeza crónico', 1, 5);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-07-22', 'Dolor de cabeza crónico', 1, 5);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-03-05', 'Dolor de estomago', 1, 3);
-
--- Visitas de seguimiento con Pediatría (ID: 2)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-04-15', 'Control de niño sano', 2, 2);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-10-10', 'Control de niño sano', 2, 2);
-
--- Visitas de seguimiento con Cardiología (ID: 1)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-01-20', 'Control de presión arterial', 5, 1);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-18', 'Control de presión arterial', 5, 1);
-
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-18', 'Control de presión arterial', 5, 1);
-
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-18', 'Control de presión arterial', 5, 1);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-18', 'Control de presión arterial', 6, 1);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-20', 'Control de presión arterial', 6, 1);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-26', 'Control de presión arterial', 7, 2);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-28', 'Control de presión arterial', 7, 2);
-
--- PACIENTES CON EXACTAMENTE CON DOS VISITAS AL MEDICO
-
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Andrés Medina', 4141112233);
-
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Valentina Rojas', 4122223344);
-
-INSERT INTO "PACIENTE" ("nombre", "telefono") 
-VALUES ('Javier Blanco', 4163334455);
-
---  Visitas para Andrés Medina (ID 9) - Va con Cardiología (Médico 1)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-01-15', 'Palpitaciones', 9, 1);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-02-15', 'Chequeo de resultados (Holter)', 9, 1);
-
-
---  Visitas para Valentina Rojas (ID 10) - Va con Pediatría (Médico 2)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-03-10', 'Vacunación de rutina', 10, 2);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-04-10', 'Revisión de peso y talla', 10, 2);
-
-
---  Visitas para Javier Blanco (ID 11) - Va con Medicina General (Médico 3)
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-05-20', 'Chequeo general anual', 11, 3);
-
-INSERT INTO "VISITA_MEDICA" ("fecha", "motivo", "id_paciente", "id_medico") 
-VALUES ('2026-06-25', 'Lectura de exámenes de laboratorio', 11, 3);
-
+-- Paciente con 3 visitas, distinto motivo (Excluido de todas las consultas restrictivas)
+('2026-12-10', 'Tos seca', 14, 4),
+('2026-12-15', 'Resultados de laboratorio', 14, 4),
+('2026-12-20', 'Evaluación preoperatoria', 14, 4);
